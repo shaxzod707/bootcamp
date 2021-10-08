@@ -8,7 +8,7 @@ namespace bootcamp
         static void Main()
         {
 
-            System.Console.WriteLine("LABni tanla(2, 3, 4, 5, 6); ");
+            System.Console.WriteLine("LABni tanla(2, 3, 4, 5, 6, 7); ");
             var line = Console.ReadLine();
             var data = line.Split(' ');
             var a = int.Parse(data[0]);
@@ -107,6 +107,16 @@ namespace bootcamp
                 lab6.Problem23();
                 lab6.Problem24();
 
+            }
+
+            if ( a == 7)
+            {
+                var lab7 = new Lab7();
+                lab7.Problem1();
+                lab7.Problem2();
+                lab7.Problem3();
+                lab7.Problem4();
+                lab7.Problem5();
             }
 
         }
