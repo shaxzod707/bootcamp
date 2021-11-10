@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
-namespace tasks
+namespace sillyapi
 {
     public class Startup
     {
@@ -23,7 +23,7 @@ namespace tasks
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "tasks", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "sillyapi", Version = "v1" });
             });
         }
 
@@ -34,7 +34,7 @@ namespace tasks
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "tasks v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "sillyapi v1"));
             }
 
             app.UseHttpsRedirection();
