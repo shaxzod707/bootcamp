@@ -12,11 +12,13 @@ namespace tasks.Services
     {
         private readonly TaskDbContext _context;
         private readonly ILogger<DbStorageService> _logger;
+        private readonly IStorageService _storage;
 
-        public DbStorageService(TaskDbContext context, ILogger<DbStorageService> logger)
+        public DbStorageService(TaskDbContext context, ILogger<DbStorageService> logger, IStorageService storage)
         {
             _context = context;
             _logger = logger;
+            _storage = storage;
         }
 
         public async Task<List<Entity.Task>> GetTasksAsync(
@@ -106,5 +108,57 @@ namespace tasks.Services
                 return (false, e);
             }
         }
+
+        public async Task<(bool IsSuccess, Exception exception, Entity.Task task)> RemoveAsync(Entity.Task task)
+        {
+            try
+            {
+                _context.Tasks.Remove(task);
+                await _context.SaveChangesAsync();
+                return (true, null, task );
+            }
+            catch(Exception e)
+            {
+                return (false, e, null);
+            }
+        }
+
+        public async Task<(bool IsSuccess, Exception exception)> RemoveTaskAsync(Entity.Task task)
+        {
+            try
+            {
+                await _storage.RemoveTaskAsync(task);
+                await _context.SaveChangesAsync();
+
+                _logger.LogInformation($"Task deleted ID: {task.Id}");
+                return (true, null);
+            }
+            catch(Exception e)
+            {
+                _logger.LogInformation($"Deleting task from DB failed\nError: {e.Message}", e);
+                return (false, e);
+            }
+        }
+
+        public async Task<(bool IsSuccess, Exception exception)> UpdateTaskAsync(Entity.Task task)
+        {
+            try
+            {
+                _context.Tasks.Update(task);
+                await _context.SaveChangesAsync();
+                
+                _logger.LogInformation($"Task updated in DB: {task.Id}");
+
+
+                return (true, null);
+            }
+            catch(Exception e)
+            {
+                _logger.LogInformation($"Updated task to DB failed: {e.Message}", e);
+                
+                return (false, e);
+            }
+        }
+
     }
 }

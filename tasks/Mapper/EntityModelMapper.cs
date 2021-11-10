@@ -1,4 +1,3 @@
-using System.Linq;
 namespace tasks.Mapper
 {
     public static class EntityModelMapper
@@ -8,11 +7,11 @@ namespace tasks.Mapper
             return new Model.NewTask(
                 title: task.Title,
                 description: task.Description,
-                tags: task.Tags is null ? string.Empty : string.Join(",", task.Tags)tags,
+                tags: task.Tags is null ? string.Empty : string.Join(",", task.Tags),
                 location: task.Location.ToString(),
                 atATime: task.AtATime,
-                onADay: task.OnADay,
                 repeat: task.Repeat.ToModelTaskRepeat(),
+                onADay: task.OnADay,
                 status: task.Status.ToModelTaskStatus(),
                 priority: task.Priority.ToModelTaskPriority(),
                 url: task.Url
