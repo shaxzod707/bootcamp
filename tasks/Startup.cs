@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using tasks.Data;
+using tasks.Services;
 
 namespace tasks
 {
@@ -19,7 +22,10 @@ namespace tasks
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TaskDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("TaskConnection")));
 
+            services.AddTransient<IStorageService, DbStorageService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
