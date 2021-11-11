@@ -14,7 +14,7 @@ namespace tasks.Services
             string description = default(string),
             string tags = default(string),
             Entity.ETaskPriority? priority = null,
-            Entity.ETaskRepeat? repeat= null,
+            Entity.ETaskRepeat? repeat = null,
             Entity.ETaskStatus? status = null,
             DateTimeOffset onADay = default(DateTimeOffset),
             DateTimeOffset atATime = default(DateTimeOffset),

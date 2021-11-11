@@ -24,11 +24,11 @@ namespace tasks.Entity
 
         public DateTimeOffset AtATime { get; set; }
 
-        public ETaskStatus Status { get; set; }
+        public ETaskStatus? Status { get; set; }
 
-        public ETaskRepeat Repeat { get; set; }
+        public ETaskRepeat? Repeat { get; set; }
 
-        public ETaskPriority Priority { get; set; }
+        public ETaskPriority? Priority { get; set; }
 
         public string Location { get; set; }
 
@@ -50,6 +50,20 @@ namespace tasks.Entity
             Repeat = repeat;
             Priority = priority;
             Location = location;
+            Url = url;
+        }
+
+        public Task(string? title, string? description, string tags, string location, DateTimeOffset atATime, DateTimeOffset onADay, ETaskRepeat repeat, ETaskStatus status, ETaskPriority priority, string? url)
+        {
+            Title = title;
+            Description = description;
+            Tags = tags;
+            Location = location;
+            AtATime = atATime;
+            OnADay = onADay;
+            Repeat = repeat;
+            Status = status;
+            Priority = priority;
             Url = url;
         }
     }
